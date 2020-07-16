@@ -21,9 +21,15 @@ const rootReducer = combineReducers({
     shop: shopReducer
 });
 
+const middlewares = [];
+
+if(process.env.NODE_ENV === 'development'){
+    middlewares.push(logger)
+}
+
 export const store = createStore(
     persistReducer(persistConfig, rootReducer),
-    applyMiddleware(logger),
+    applyMiddleware(...middlewares),
     // applyMiddleware(thunk),
     // applyMiddleware(routerMiddleware(history))
 );

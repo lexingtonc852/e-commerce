@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import logger from 'redux-logger';
 import { persistStore } from 'redux-persist';
 import { persistReducer } from 'redux-persist';
+import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
 import { userReducer } from './user/reducers';
 import { cartReducer } from './cart/reducers';
@@ -21,7 +22,7 @@ const rootReducer = combineReducers({
     shop: shopReducer
 });
 
-const middlewares = [];
+const middlewares = [thunk];
 
 if(process.env.NODE_ENV === 'development'){
     middlewares.push(logger)
